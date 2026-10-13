@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tất cả trang web của HRGBVN</title>
+  <style>
+    :root{
+      --bg1:#0f172a;
+      --bg2:#111827;
+      --card:rgba(255,255,255,.08);
+      --card2:rgba(255,255,255,.12);
+      --text:#f8fafc;
+      --muted:#cbd5e1;
+      --accent:#38bdf8;
+      --accent2:#a78bfa;
+      --accent3:#34d399;
+      --danger:#fb7185;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 22px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.22), transparent 30%),
+        radial-gradient(circle at top right, rgba(167,139,250,.20), transparent 28%),
+        radial-gradient(circle at bottom, rgba(52,211,153,.12), transparent 30%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    .wrap{
+      width:min(1200px, 92%);
+      margin:0 auto;
+      padding:28px 0 40px;
+    }
+
+    .hero{
+      text-align:center;
+      padding:34px 18px 22px;
+      position:relative;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    h1{
+      margin:18px 0 8px;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height:1.05;
+      letter-spacing:-0.03em;
+    }
+
+    .subtitle{
+      margin:0 auto;
+      max-width:760px;
+      color:var(--muted);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+
+    .clock-panel{
+      margin:24px auto 0;
+      width:min(900px, 100%);
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:14px;
+    }
+
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+      backdrop-filter: blur(14px);
+    }
+
+    .panel h2{
+      margin:0 0 10px;
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:rgba(248,250,252,.72);
+    }
+
+    .time{
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      font-weight:800;
+      letter-spacing:.02em;
+    }
+
+    .date{
+      font-size: clamp(1.05rem, 2.6vw, 1.45rem);
+      color:var(--muted);
+      font-weight:600;
+    }
+
+    .section-title{
+      margin:30px 0 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .section-title h2{
+      margin:0;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+    }
+
+    .hint{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:16px;
+    }
+
+    .card{
+      grid-column: span 4;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+      min-height:170px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:14px;
+      position:relative;
+      overflow:hidden;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .card:hover{
+      transform: translateY(-4px);
+      border-color: rgba(56,189,248,.45);
+      background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.08));
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-40% -30% auto auto;
+      width:180px;
+      height:180px;
+      background: radial-gradient(circle, rgba(56,189,248,.22), transparent 65%);
+      transform: rotate(20deg);
+      pointer-events:none;
+    }
+
+    .card h3{
+      margin:0;
+      font-size:1.08rem;
+      line-height:1.25;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      border:none;
+      outline:none;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 16px;
+      border-radius:16px;
+      font-weight:800;
+      color:#06121f;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 14px 30px rgba(56,189,248,.22);
+      transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+      min-height:48px;
+    }
+
+    .btn:hover{
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow: 0 18px 40px rgba(56,189,248,.30);
+    }
+
+    .btn:active{ transform: translateY(0px) scale(.99); }
+
+    .btn.secondary{
+      background: linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.10));
+      color:var(--text);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:none;
+    }
+
+    .footer{
+      margin-top:28px;
+      text-align:center;
+      color:var(--muted);
+      padding:18px 10px 8px;
+    }
+
+    .footer strong{ color:var(--text); }
+
+    .toast{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:min(420px, calc(100vw - 36px));
+      background: rgba(15,23,42,.92);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:20px;
+      box-shadow: var(--shadow);
+      padding:16px;
+      backdrop-filter: blur(12px);
+      transform: translateY(20px);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .2s ease, transform .2s ease;
+      z-index:9999;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform: translateY(0);
+      pointer-events:auto;
+    }
+
+    .toast h4{
+      margin:0 0 6px;
+      font-size:15px;
+    }
+
+    .toast p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .countdown{
+      margin-top:10px;
+      font-size:28px;
+      font-weight:900;
+      color:var(--accent3);
+    }
+
+    .toast-actions{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 980px){
+      .card{ grid-column: span 6; }
+      .clock-panel{ grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px){
+      .wrap{ width:min(100% - 24px, 1200px); padding-top:20px; }
+      .hero{ padding-top:24px; }
+      .card{ grid-column: span 12; min-height:auto; }
+      .btn{ width:100%; }
+      .actions{ width:100%; }
+      .section-title{ align-items:flex-start; flex-direction:column; }
+    }
+  </style>
+<base target="_blank">
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="badge">🇻🇳 Website tổng hợp • All-in-one • HTML</div>
+      <h1>Tất cả trang web của HRGBVN</h1>
+      <p class="subtitle">made in VN 🇻🇳</p>
+
+      <div class="clock-panel">
+        <div class="panel">
+          <h2>Đồng hồ real-time</h2>
+          <div id="clock" class="time">--:--:--</div>
+        </div>
+        <div class="panel">
+          <h2>Ngày / Tháng / Năm</h2>
+          <div id="date" class="date">Đang tải...</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-title">
+      <h2>Danh sách website</h2>
+      <div class="hint">Bấm vào nút bất kỳ, website sẽ thông báo và tự mở tab mới sau 5 giây.</div>
+    </section>
+
+    <section class="grid" id="appGrid"></section>
+
+    <footer class="footer">
+      <div><strong>made in VN 🇻🇳</strong> made by <strong>Nguyễn Chí Dự 🇻🇳✨🇻🇳</strong> powered by all html :)))))</div>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">
+    <h4 id="toastTitle">Đang chuyển trang...</h4>
+    <p id="toastDesc">Sẽ tự động mở tab mới.</p>
+    <div id="toastCount" class="countdown">5</div>
+    <div class="toast-actions">
+      <button class="btn" id="openNow">Mở ngay</button>
+      <button class="btn secondary" id="cancelOpen">Hủy</button>
+    </div>
+  </div>
+
+  <script>
+    const apps = [
+      { name: "Website 1 - Kiểm tra số đẹp", desc: "Kiểm tra số đẹp", url: "https://check-for-lucky-numbers.vercel.app/" },
+      { name: "Thùng rác", desc: "Thùng rác", url: "https://trash-can-nine.vercel.app/" },
+      { name: "Máy tính", desc: "Máy tính", url: "https://calculator-gold-gamma-17.vercel.app/" },
+      { name: "Trang web âm nhạc", desc: "Trang web âm nhạc", url: "https://music-website-hazel-two.vercel.app/" },
+      { name: "Trang web xem gì cũng được", desc: "Trang web xem gì cũng được", url: "https://you-can-watch-anything-on-this-webs-three.vercel.app/" },
+      { name: "Kiểm tra tuổi của bạn", desc: "Kiểm tra tuổi của bạn", url: "https://check-your-age-xi.vercel.app/" },
+      { name: "Countdown sinh nhật của chủ website", desc: "Countdown sinh nhật của chủ website", url: "https://birthday-countdown-lac.vercel.app/" },
+      { name: "Countdown đến Tết Nguyên Đán", desc: "Countdown đến Tết Nguyên Đán", url: "https://countdown-lunar-new-year-per-year.vercel.app/" },
+      { name: "Bạn có thể xem gì ở website này", desc: "Bạn có thể xem gì ở website này", url: "https://you-can-watch-anything-on-this-webs.vercel.app/" },
+      { name: "Tạo profile của bạn", desc: "Tạo profile của bạn", url: "https://create-your-profile.vercel.app/" }
+    ];
+
+    const grid = document.getElementById('appGrid');
+    const toast = document.getElementById('toast');
+    const toastTitle = document.getElementById('toastTitle');
+    const toastDesc = document.getElementById('toastDesc');
+    const toastCount = document.getElementById('toastCount');
+    const openNowBtn = document.getElementById('openNow');
+    const cancelOpenBtn = document.getElementById('cancelOpen');
+
+    let countdownTimer = null;
+    let currentUrl = null;
+
+    function renderApps(){
+      grid.innerHTML = apps.map((app, idx) => `
+        <article class="card">
+          <div>
+            <h3>${app.name}</h3>
+            <p>${app.desc}</p>
+          </div>
+          <div class="actions">
+            <button class="btn" data-url="${app.url}" data-name="${app.name}">Mở website</button>
+            <a class="btn secondary" href="${app.url}" target="_blank" rel="noopener noreferrer">Mở trực tiếp</a>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function updateClock(){
+      const now = new Date();
+      const time = now.toLocaleTimeString('vi-VN', { hour12: false });
+      const date = now.toLocaleDateString('vi-VN', {
+        weekday: 'long',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+      document.getElementById('clock').textContent = time;
+      document.getElementById('date').textContent = date;
+    }
+
+    function openUrl(url){
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+    function startToast(url, name){
+      currentUrl = url;
+      toastTitle.textContent = `Đang chuyển sang: ${name}`;
+      toastDesc.textContent = 'Tab mới sẽ tự động mở sau 5 giây.';
+      toast.classList.add('show');
+      let remain = 5;
+      toastCount.textContent = remain;
+      clearInterval(countdownTimer);
+      countdownTimer = setInterval(() => {
+        remain -= 1;
+        toastCount.textContent = remain;
+        if(remain <= 0){
+          clearInterval(countdownTimer);
+          toast.classList.remove('show');
+          if(currentUrl) openUrl(currentUrl);
+          currentUrl = null;
+        }
+      }, 1000);
+    }
+
+    function cancelToast(){
+      clearInterval(countdownTimer);
+      toast.classList.remove('show');
+      currentUrl = null;
+    }
+
+    grid.addEventListener('click', (e) => {
+      const btn = e.target.closest('button.btn');
+      if(!btn) return;
+      const url = btn.getAttribute('data-url');
+      const name = btn.getAttribute('data-name') || 'website';
+      startToast(url, name);
+    });
+
+    openNowBtn.addEventListener('click', () => {
+      if(currentUrl){
+        clearInterval(countdownTimer);
+        toast.classList.remove('show');
+        openUrl(currentUrl);
+        currentUrl = null;
+      }
+    });
+
+    cancelOpenBtn.addEventListener('click', cancelToast);
+
+    renderApps();
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
